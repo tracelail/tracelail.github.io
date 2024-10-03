@@ -30,13 +30,13 @@ Actively developing my bioinformatics skillset under the guidance of an industry
 ## Looking to Connect:
 I'm eager to collaborate with fellow researchers, bioinformaticians, and healthcare professionals who share my commitment to advancing rare disease research. Let's connect and explore how we can work together to make a difference in this critical field.
 
-<h2>Skills</h2>
+<!-- <h2>Skills</h2>
 
 <ul class="skill-list">
 	<li>Python</li>
 	<li>Seqera</li>
 	<li>nf-core</li>
-</ul>
+</ul> -->
 
 <!-- <h2>Projects</h2> -->
 
