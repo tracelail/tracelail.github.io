@@ -4,42 +4,44 @@ layout: page
 ---
 ![Profile Image]({% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %})
 
-<p>Lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p># Aspiring Bioinformatician | Rare Disease Specialist
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+With a strong foundation in biology and physiology, I'm leveraging my biotechnology experience and growing bioinformatics skills to pursue a career in rare disease research. My goal is to make a meaningful impact on the lives of patients facing limited treatment options and uncertain prognoses.
+
+## Background:
+- Bachelor's degree in Biology
+- Master's degree in Physiology
+- 5+ years of experience in the biotech industry since 2019
+
+## Skills & Expertise:
+- Bioinformatics: Python programming, nf-core RNAseq pipelines, differential abundance analysis
+- Next-generation sequencing data analysis
+- Nextflow workflow management
+- Technical writing and documentation
+- Presentation and communication skills
+- Collaborative project management
+
+## Industry Experience:
+During my five years in the biotech industry, I've honed my ability to translate complex scientific concepts into clear, compelling presentations and technical documents. I've collaborated with cross-functional teams, enhancing my communication skills and ability to work effectively in diverse, fast-paced environments. This experience has given me a strong foundation in project management and the practical application of scientific knowledge in real-world settings.
+
+## Current Focus:
+Actively developing my bioinformatics skillset under the guidance of an industry mentor, with a particular emphasis on rare disease genomics. I'm passionate about applying computational approaches to uncover insights that could lead to new therapeutics for underserved patient populations.
+
+## Looking to Connect:
+I'm eager to collaborate with fellow researchers, bioinformaticians, and healthcare professionals who share my commitment to advancing rare disease research. Let's connect and explore how we can work together to make a difference in this critical field.</p>
 
 <h2>Skills</h2>
 
 <ul class="skill-list">
-	<li>HTML - Jade - Haml - Erb</li>
-	<li>Responsive (Mobile First)</li>
-	<li>CSS (Stylus, Sass, Less)</li>
-	<li>Css Frameworks (Bootstrap, Foundation)</li>
-	<li>Javascript (Design Patterns, Tests)</li>
-	<li>AngularJS - ReactJS</li>
-	<li>Grunt - Gulp - Yeoman</li>
-	<li>Git</li>
-	<li>PHP</li>
 	<li>Python</li>
-	<li>MySQL - MongoDB</li>
-	<li>Scrum and Kanban</li>
-	<li>TDD e Continuous Integration</li>
+	<li>Seqera</li>
+	<li>nf-core</li>
 </ul>
 
-<h2>Projects</h2>
+<!-- <h2>Projects</h2> -->
 
-<ul>
+<!-- <ul>
 	<li><a href="https://github.com/">Lorem Lorem</a></li>
 	<li><a href="https://github.com/">Ipsum Dolor</a></li>
 	<li><a href="https://github.com/">Dolor Lorem</a></li>
-</ul>
+</ul> -->
