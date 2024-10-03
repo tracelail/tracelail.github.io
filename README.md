@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
     <h2 align="center">Indigo Minimalist Jekyll Template - <a href="https://sergiokopplin.github.io/indigo/">Demo</a></h2>
 </p>
 
@@ -64,4 +64,4 @@ Check the [FAQ](./FAQ.md).
 
 ---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=sergiokopplin/indigo&type=Date)](https://star-history.com/#sergiokopplin/indigo&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=sergiokopplin/indigo&type=Date)](https://star-history.com/#sergiokopplin/indigo&Date) -->
