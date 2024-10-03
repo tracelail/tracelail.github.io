@@ -4,7 +4,7 @@ layout: page
 ---
 ![Profile Image]({% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %})
 
-<p># Aspiring Bioinformatician | Rare Disease Specialist
+# Aspiring Bioinformatician | Rare Disease Specialist
 
 With a strong foundation in biology and physiology, I'm leveraging my biotechnology experience and growing bioinformatics skills to pursue a career in rare disease research. My goal is to make a meaningful impact on the lives of patients facing limited treatment options and uncertain prognoses.
 
@@ -28,7 +28,7 @@ During my five years in the biotech industry, I've honed my ability to translate
 Actively developing my bioinformatics skillset under the guidance of an industry mentor, with a particular emphasis on rare disease genomics. I'm passionate about applying computational approaches to uncover insights that could lead to new therapeutics for underserved patient populations.
 
 ## Looking to Connect:
-I'm eager to collaborate with fellow researchers, bioinformaticians, and healthcare professionals who share my commitment to advancing rare disease research. Let's connect and explore how we can work together to make a difference in this critical field.</p>
+I'm eager to collaborate with fellow researchers, bioinformaticians, and healthcare professionals who share my commitment to advancing rare disease research. Let's connect and explore how we can work together to make a difference in this critical field.
 
 <h2>Skills</h2>
 
