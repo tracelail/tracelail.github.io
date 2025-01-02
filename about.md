@@ -4,7 +4,7 @@ layout: page
 ---
 ![Profile Image]({% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %})
 
-# Aspiring Bioinformatician | Rare Disease Specialist
+# Bioinformatician | Rare Disease Specialist
 
 With a strong foundation in biology and physiology, I'm leveraging my biotechnology experience and growing bioinformatics skills to pursue a career in rare disease research. My goal is to make a meaningful impact on the lives of patients facing limited treatment options and uncertain prognoses.
 
