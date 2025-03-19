@@ -1,11 +1,14 @@
+---
+layout: post
+title: "Understanding Function, Methods, and Class Methods"
+date: 2025-03-19
+category: blog
+---
+
 ```python
 %load_ext autoreload
 %autoreload 2
 ```
-
-    The autoreload extension is already loaded. To reload it, use:
-      %reload_ext autoreload
-
 
 # Functions vs. Methods
 
