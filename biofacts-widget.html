@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioFacts — Daily Bioinformatics Facts</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --bg2: #eceae0;
+    --ink: #1a1a18;
+    --ink2: #4a4a42;
+    --ink3: #8a8a7a;
+    --accent: #2d6a4f;
+    --accent2: #52b788;
+    --accent-light: #d8f3dc;
+    --warn: #b5451b;
+    --card: #ffffff;
+    --border: #d8d6cc;
+    --radius: 4px;
+    --radius-lg: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .logo span {
+    color: var(--ink);
+  }
+  .tagline {
+    font-size: 0.7rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Setup screen */
+  #setup-screen {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+  .setup-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .setup-desc {
+    font-size: 0.72rem;
+    color: var(--ink2);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .setup-desc a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .input-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  input[type="password"], input[type="text"] {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  input:focus { border-color: var(--accent2); }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink2);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg2); }
+  .save-note {
+    font-size: 0.65rem;
+    color: var(--ink3);
+    margin-top: 0.4rem;
+  }
+  .save-note label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+  .error-msg {
+    font-size: 0.68rem;
+    color: var(--warn);
+    margin-top: 0.5rem;
+    display: none;
+  }
+
+  /* Fact screen */
+  #fact-screen { display: none; }
+
+  .date-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .date-str {
+    font-size: 0.65rem;
+    color: var(--ink3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .category-pill {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .fact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .fact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent2);
+  }
+  .fact-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.875rem;
+  }
+  .fact-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .fact-text em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .deeper-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.72rem;
+    line-height: 1.75;
+    color: var(--ink2);
+    margin-bottom: 1rem;
+    display: none;
+    animation: slideDown 0.2s ease;
+  }
+  .deeper-card.open { display: block; }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .loading-state {
+    padding: 1rem 0;
+    font-size: 0.72rem;
+    color: var(--ink3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .dot-pulse {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .dot-pulse span {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+  .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    color: var(--ink3);
+  }
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    transition: background 0.15s;
+    font-weight: 500;
+  }
+  .footer a:hover { background: var(--bg2); }
+  .key-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .key-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+
+  .copy-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.68rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+  .copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="logo">Bio<span>Facts</span></div>
+    <div class="tagline">Daily bioinformatics</div>
+  </div>
+
+  <!-- Setup Screen -->
+  <div id="setup-screen">
+    <div class="setup-title">Enter your Gemini API key</div>
+    <div class="setup-desc">
+      BioFacts uses the Claude API to generate a fresh bioinformatics fact each day.
+      Your key never leaves your browser — it's used only to make the API call directly. The Gemini free tier requires no credit card.
+      Get a free key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a>.
+    </div>
+    <div class="input-row">
+      <input type="password" id="api-key-input" placeholder="AIza..." autocomplete="off" />
+      <button class="btn btn-primary" onclick="submitKey()">Load facts →</button>
+    </div>
+    <div class="save-note">
+      <label>
+        <input type="checkbox" id="save-key" checked />
+        Remember key in this browser
+      </label>
+    </div>
+    <div class="error-msg" id="error-msg">Invalid key or API error. Please check and try again.</div>
+  </div>
+
+  <!-- Fact Screen -->
+  <div id="fact-screen">
+    <div class="date-bar">
+      <div class="date-str" id="date-str"></div>
+      <div class="category-pill" id="category-pill"></div>
+    </div>
+
+    <div class="fact-card">
+      <div class="fact-label">Did you know?</div>
+      <div id="fact-body">
+        <div class="loading-state">
+          <div class="dot-pulse">
+            <span></span><span></span><span></span>
+          </div>
+          Generating today's fact...
+        </div>
+      </div>
+    </div>
+
+    <div class="deeper-card" id="deeper-card"></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="deeper-btn" onclick="toggleDeeper()" style="display:none;">Go deeper ↓</button>
+      <button class="btn btn-ghost" id="copy-btn" onclick="copyFact()" style="display:none;">Copy fact</button>
+      <button class="btn btn-ghost" onclick="clearKey()">Change key</button>
+    </div>
+
+    <div class="footer">
+      <div class="key-indicator">
+        <div class="key-dot"></div>
+        Key active
+      </div>
+      <a href="https://github.com/tracelail/biofacts" target="_blank">
+        ↓ Get BioFacts for yourself
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="copy-toast">Copied to clipboard!</div>
+
+<script>
+const CATEGORIES = [
+  'Genomics', 'Sequence Alignment', 'Proteomics', 'RNA-seq',
+  'Machine Learning in Bio', 'Tools & Algorithms', 'Population Genetics', 'Structural Biology',
+  'Metagenomics', 'CRISPR & Gene Editing'
+];
+
+const today = new Date();
+const dateKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+const category = CATEGORIES[(today.getDate() + today.getMonth() * 3) % CATEGORIES.length];
+
+document.getElementById('date-str').textContent = today.toLocaleDateString('en-US', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
+document.getElementById('category-pill').textContent = category;
+
+let currentFact = '';
+let deeperContent = '';
+
+// Check for saved key
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('biofacts_gemini_key');
+  if (saved) {
+    document.getElementById('api-key-input').value = saved;
+    showFactScreen();
+    loadFact(saved);
+  }
+});
+
+function submitKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key.startsWith('AIza')) {
+    document.getElementById('error-msg').style.display = 'block';
+    return;
+  }
+  document.getElementById('error-msg').style.display = 'none';
+  if (document.getElementById('save-key').checked) {
+    localStorage.setItem('biofacts_gemini_key', key);
+  }
+  showFactScreen();
+  loadFact(key);
+}
+
+document.getElementById('api-key-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitKey();
+});
+
+function showFactScreen() {
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('fact-screen').style.display = 'block';
+}
+
+function clearKey() {
+  localStorage.removeItem('biofacts_gemini_key');
+  document.getElementById('fact-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'block';
+  document.getElementById('api-key-input').value = '';
+  document.getElementById('fact-body').innerHTML = `<div class="loading-state"><div class="dot-pulse"><span></span><span></span><span></span></div>Generating today's fact...</div>`;
+  document.getElementById('deeper-card').classList.remove('open');
+  document.getElementById('deeper-btn').style.display = 'none';
+  document.getElementById('copy-btn').style.display = 'none';
+}
+
+async function loadFact(apiKey) {
+  // Check if we already fetched today
+  const cached = localStorage.getItem(`biofacts_fact_${dateKey}`);
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    renderFact(parsed.fact, parsed.deeper);
+    return;
+  }
+
+  try {
+    const prompt = `You generate a single daily bioinformatics "Did You Know" fact. Rules:
+- Genuinely surprising and specific — include real numbers, names, tools, or discoveries
+- 2-3 sentences for the main fact, written for a smart grad student
+- NOT generic ("bioinformatics uses computers") — make it something they'd tell a labmate
+- The "deeper" field is 2-3 sentences of more technical context or background
+
+Category: ${category}. Date seed: ${dateKey}.
+
+Respond ONLY with valid JSON, no markdown, no preamble:
+{"fact": "...", "deeper": "..."}`;
+
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 500 }
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error?.message || 'API error');
+    }
+
+    const data = await res.json();
+    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
+
+    localStorage.setItem(`biofacts_fact_${dateKey}`, JSON.stringify(parsed));
+    renderFact(parsed.fact, parsed.deeper);
+
+  } catch(e) {
+    document.getElementById('fact-body').innerHTML = `
+      <div style="font-size:0.72rem; color:var(--warn); line-height:1.7;">
+        Couldn't load today's fact: ${e.message}.<br>
+        <button class="btn btn-ghost" style="margin-top:0.75rem; font-size:0.68rem;" onclick="clearKey()">Check API key</button>
+      </div>`;
+  }
+}
+
+function renderFact(fact, deeper) {
+  currentFact = fact;
+  deeperContent = deeper;
+  document.getElementById('fact-body').innerHTML = `<p class="fact-text">${fact}</p>`;
+  document.getElementById('deeper-btn').style.display = 'inline-block';
+  document.getElementById('copy-btn').style.display = 'inline-block';
+  document.getElementById('deeper-card').textContent = deeper;
+}
+
+function toggleDeeper() {
+  const card = document.getElementById('deeper-card');
+  const btn = document.getElementById('deeper-btn');
+  const open = card.classList.toggle('open');
+  btn.textContent = open ? 'Show less ↑' : 'Go deeper ↓';
+}
+
+function copyFact() {
+  const text = `Did you know? ${currentFact}\n\n#Bioinformatics #BioFacts\nvia tracelail.github.io`;
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
+</script>
+</body>
+</html>
