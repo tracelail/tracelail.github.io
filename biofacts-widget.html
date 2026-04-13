@@ -459,11 +459,11 @@ Rules:
 - Genuinely surprising and specific — include real numbers, names, tools, or discoveries
 - 2-3 sentences for the main fact, written for a smart grad student
 - NOT generic — make it something they'd tell a labmate
-- The "deeper" field is 2-3 sentences of more technical context
+- The deeper explanation is 2-3 sentences of more technical context
 
-IMPORTANT: Your entire response must be ONLY the JSON object below. No explanation, no markdown, no code fences, no text before or after.
-
-{"fact": "your fact here", "deeper": "your deeper explanation here"}`;
+You MUST respond in EXACTLY this format with no other text:
+FACT: [write the fact here]
+DEEPER: [write the deeper explanation here]`;
 
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -484,15 +484,17 @@ IMPORTANT: Your entire response must be ONLY the JSON object below. No explanati
 
     const data = await res.json();
     const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    document.getElementById('fact-body').innerHTML = `<pre style="font-size:0.6rem;white-space:pre-wrap;word-break:break-all;color:var(--ink2)">${raw}</pre>`;
-    return;
-    const cleaned = raw.replace(/```json|```/g, '').trim();
-    const jsonMatch = cleaned.match(/\{[\s\S]*"fact"[\s\S]*"deeper"[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Could not parse response from Gemini. Try again!');
-    const parsed = JSON.parse(jsonMatch[0]);
 
-    localStorage.setItem(`biofacts_fact_${dateKey}`, JSON.stringify(parsed));
-    renderFact(parsed.fact, parsed.deeper);
+    const factMatch = raw.match(/FACT:\s*(.+?)(?=DEEPER:|$)/s);
+    const deeperMatch = raw.match(/DEEPER:\s*(.+?)$/s);
+
+    if (!factMatch || !deeperMatch) throw new Error('Unexpected response format. Try refreshing!');
+
+    const fact = factMatch[1].trim();
+    const deeper = deeperMatch[1].trim();
+
+    localStorage.setItem(`biofacts_fact_${dateKey}`, JSON.stringify({ fact, deeper }));
+    renderFact(fact, deeper);
 
   } catch(e) {
     document.getElementById('fact-body').innerHTML = `
