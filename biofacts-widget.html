@@ -453,16 +453,17 @@ async function loadFact(apiKey) {
   }
 
   try {
-    const prompt = `You generate a single daily bioinformatics "Did You Know" fact. Rules:
+    const prompt = `Generate a daily bioinformatics "Did You Know" fact for the category: ${category}.
+
+Rules:
 - Genuinely surprising and specific — include real numbers, names, tools, or discoveries
 - 2-3 sentences for the main fact, written for a smart grad student
-- NOT generic ("bioinformatics uses computers") — make it something they'd tell a labmate
-- The "deeper" field is 2-3 sentences of more technical context or background
+- NOT generic — make it something they'd tell a labmate
+- The "deeper" field is 2-3 sentences of more technical context
 
-Category: ${category}. Date seed: ${dateKey}.
+IMPORTANT: Your entire response must be ONLY the JSON object below. No explanation, no markdown, no code fences, no text before or after.
 
-Respond ONLY with valid JSON, no markdown, no preamble:
-{"fact": "...", "deeper": "..."}`;
+{"fact": "your fact here", "deeper": "your deeper explanation here"}`;
 
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -483,7 +484,10 @@ Respond ONLY with valid JSON, no markdown, no preamble:
 
     const data = await res.json();
     const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    const parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    const cleaned = raw.replace(/```json|```/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*"fact"[\s\S]*"deeper"[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Could not parse response from Gemini. Try again!');
+    const parsed = JSON.parse(jsonMatch[0]);
 
     localStorage.setItem(`biofacts_fact_${dateKey}`, JSON.stringify(parsed));
     renderFact(parsed.fact, parsed.deeper);
