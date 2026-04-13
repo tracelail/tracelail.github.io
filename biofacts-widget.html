@@ -484,6 +484,7 @@ IMPORTANT: Your entire response must be ONLY the JSON object below. No explanati
 
     const data = await res.json();
     const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    console.log('RAW GEMINI RESPONSE:', raw);
     const cleaned = raw.replace(/```json|```/g, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*"fact"[\s\S]*"deeper"[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse response from Gemini. Try again!');
