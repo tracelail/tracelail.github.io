@@ -4,31 +4,30 @@ layout: page
 ---
 ![Profile Image]({% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %})
 
-# Bioinformatician | Rare Disease Specialist
+# Bioinformatics Scientist | Pipeline Engineer | Nextflow Ambassador
 
-With a strong foundation in biology and physiology, I'm leveraging my biotechnology experience and growing bioinformatics skills to pursue a career in rare disease research. My goal is to make a meaningful impact on the lives of patients facing limited treatment options and uncertain prognoses.
+Bioinformatics scientist with five years of industry experience in gene therapy at BridgeBio, where I built computational genetics workflows, ran nf-core pipelines on Seqera Platform, and developed R Shiny dashboards for experimental decision support. Now completing an MS in Bioinformatics at Northeastern University (expected 2027), contributing to nf-core as both an Ambassador and active module developer.
 
-## Background:
-- Bachelor's degree in Biology
-- Master's degree in Physiology
-- 5+ years of experience in the biotech industry since 2019
+## Background
+- MS Bioinformatics, Northeastern University (expected 2027) — Omics concentration
+- MS Physiology, North Carolina State University
+- BS Biological Sciences, North Carolina State University
+- 5+ years of industry experience in gene therapy and upstream bioprocess
 
-## Skills & Expertise:
-- Bioinformatics: Python programming, nf-core RNAseq pipelines, differential abundance analysis
-- Next-generation sequencing data analysis
-- Nextflow workflow management
-- Technical writing and documentation
-- Presentation and communication skills
-- Collaborative project management
+## Skills & Expertise
+- Pipeline development: Nextflow, nf-core, Seqera Platform, Docker/Podman
+- Languages: Python (OOP), R, Bash
+- Analysis: RNA-seq, Differential Abundance, Gene Ontology, Functional Enrichment
+- Infrastructure: AWS, Slurm, GitHub Actions
+- Domain: AAV gene therapy, bioreactor upstream process, ddPCR
 
-## Industry Experience:
-During my five years in the biotech industry, I've honed my ability to translate complex scientific concepts into clear, compelling presentations and technical documents. I've collaborated with cross-functional teams, enhancing my communication skills and ability to work effectively in diverse, fast-paced environments. This experience has given me a strong foundation in project management and the practical application of scientific knowledge in real-world settings.
+## Current Work
+- Nextflow Ambassador — authoring community content and hosting workshops
+- nf-core contributor — built the DIAMOND blastp subworkflow for nf-core/proteinannotator, enabling protein homology search against the full NCBI RefSeq database at scale
+- MS Bioinformatics candidate, Northeastern University
 
-## Current Focus:
-Actively developing my bioinformatics skillset under the guidance of an industry mentor, with a particular emphasis on rare disease genomics. I'm passionate about applying computational approaches to uncover insights that could lead to new therapeutics for underserved patient populations.
-
-## Looking to Connect:
-I'm eager to collaborate with fellow researchers, bioinformaticians, and healthcare professionals who share my commitment to advancing rare disease research. Let's connect and explore how we can work together to make a difference in this critical field.
+## Looking to Connect
+Open to bioinformatics engineer and pipeline engineer roles, as well as collaborations in computational genomics. Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/tracelail) or [email](mailto:lailtrace@gmail.com).
 
 <!-- <h2>Skills</h2>
 
