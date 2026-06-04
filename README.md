@@ -1,3 +1,6 @@
+# tracelail.github.io
+
+Personal website and blog hosted at [tracelail.github.io](https://tracelail.github.io). Built with Jekyll using the [Indigo](https://github.com/sergiokopplin/indigo) theme.
 <!-- <p align="center">
     <h2 align="center">Indigo Minimalist Jekyll Template - <a href="https://sergiokopplin.github.io/indigo/">Demo</a></h2>
 </p>
