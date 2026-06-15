@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From Confused to Contributing: My First nf-core PR Journey"
-date: 2026-06-15
+date: 2026-06-14
 categories: blog
 ---
 
